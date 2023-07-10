@@ -1,21 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Text Display Page</title>
+<style>
+body {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+text-align: center;
+}
+
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 400px;
+}
+
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tfoot {
+  font-weight: bold;
+}
+</style>
 </head>
 <body>
-<h1>Welcome to the Text Display Page</h1>
-
-<p>This is an example of a simple HTML page that displays text.</p>
-
-<div id="text-container">
-<p id="text"></p>
-</div>
-
-<script>
-// JavaScript code to display text
-var textElement = document.getElementById("text");
-textElement.innerHTML = "Hello, world!";
-</script>
+<h1>测试文本</h1>
+<table>
+<thead>
+<tr>
+<th>列1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行1</td>
+</tr>
+<tr>
+<td>行2</td>
+</tr>
+<tr>
+<td>行3</td>
+</tr>
+<tr>
+<td>行4</td>
+</tr>
+<tr>
+<td>行5</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="1">天空一声巨响，丰总闪亮登场！</td>
+</tr>
+</tfoot>
+</table>
 </body>
 </html>
