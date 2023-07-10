@@ -1,160 +1,44 @@
-
-<!DOCTYPE html><html lang="zh" auto_version="1688611800367" is_debug="false" is_front_project="false"><head><link rel="stylesheet" href="//static.clewm.net/nc/react.906ff9f8.chunk.css"><link rel="stylesheet" href="//static.clewm.net/nc/antd.8163688b.chunk.css"><link rel="stylesheet" href="//static.clewm.net/nc/umi.bddbd3b8.css"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-store"><meta name="referrer" content="no-referrer-when-downgrade"><link href="//static.clewm.net/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon"><title>二维码管理中心</title><!-- insert-head-code-here --><script src="//static.clewm.net/cli/js/cat-mini.js?v=1688611800367" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/volcano.js?v=1688611800367" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/sentry/bundle.min.5.29.2.js?v=1610637502833" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/sentry/bundle.tracing.min.5.29.2.js?v=1610637502833" crossorigin="anonymous"></script><script crossorigin="anonymous">(function() {
-      try {
-        var map = {
-          net: 'https://c6b87123adcb48b699d8bf763571b1df@sentry-srv.cli.im/5',
-          com: 'https://de55de16e0c841e6b25621512133bb52@sentry-srv.cli.im/7',
-          online: 'https://c2e748be19514f18ba3dde126eff335f@sentry-srv.cli.im/6',
-        };
-
-        var getDSN = function(domain) {
-          return map[domain] || map.online;
-        };
-
-        var domain = window.location.host.split('.').pop();
-
-        if (domain === 'me') return;
-
-        if (window.location.host === '127.0.0.1:8000') {
-          domain = 'net';
-        }
-
-        var dsn = getDSN(domain);
-
-        Sentry.init({
-          dsn: dsn,
-          beforeSend: function(e) {
-            const userInfo = (window.__userInfo || {}).data;
-
-            if (!userInfo) {
-              e.user = {
-                user_id: 'no match user information on window.',
-              }
-              return e;
-            }
-
-            try {
-              if (!e.user) e.user = {};
-
-              e.user.user_id = userInfo.user_info.user_id;
-              e.user.account = userInfo.user_info.account;
-              e.user.cvid = (function() {
-                var m = new RegExp('\\bcvid\\=([^;]+)').exec(document.cookie);
-                return m ? unescape(m[1]) : '';
-              })();
-
-              return e;
-            } catch (err) {
-              console.error(err);
-              e.user = {
-                user_id: 'unknow',
-              };
-
-              return e;
-            }
-          },
-
-          integrations: [
-            new Sentry.Integrations.BrowserTracing({
-              tracingOrigins: [
-                'localhost',
-                'cliim.com',
-                'console.cliim.com',
-                'h5.cliim.com',
-                'nc.cliim.com',
-                'user.cliim.com',
-                'upload-api.cliim.com',
-                'upload.api.cli.im',
-                'qiniu-nc.clewm.net',
-                'analysis-api.cliim.com',
-                'weixin.cli.im',
-                'user-api.cliim.com',
-                'record-api.cliim.com',
-                'crm.api.cli.im',
-                'socket.api.cli.im',
-                'biz.cliim.com',
-                'cli.me',
-                'console.cli.me',
-                'h5.cliim.net',
-                'nc.cliim.net',
-                'user.cli.me',
-                'upload-api.cliim.net',
-                'analysis-api.cliim.net',
-                'mpweixin.b.cliim.net',
-                'user.api.cliim.net',
-                'record-api.cliim.net',
-                'crm.api.cliim.net',
-                'socket-api.cliim.net',
-                'biz.cliim.net',
-                'cliim.net',
-                'console.cliim.net',
-                'user.cliim.net',
-                'user-api.cliim.net',
-                'crm-api.cliim.net',
-                'cli.im',
-                'console.cli.im',
-                'h5.clewm.net',
-                'nc.cli.im',
-                'user.cli.im',
-                'upload-api.cli.im',
-                'analysis-api.cli.im',
-                'user.api.cli.im',
-                'record-api.cli.im',
-                'record-export-api.cli.im',
-                'biz.cli.im',
-                'exp-console.cliim.net',
-                'exp.cliim.net',
-                'exp-h5.cliim.net',
-                'exp-nc.cliim.net',
-                'exp-user.cliim.net',
-                'exp-user-api.cliim.net',
-                'exp-record-api.cliim.net',
-                'exp-biz.cliim.net'
-              ],
-            }),
-          ],
-
-          tracesSampleRate: 1.0,
-        });
-      } catch (e) {
-        console.error(e);
-      }
-    })();</script><!--<link href="//static.clewm.net/cli/js/lib/??pace/themes/blue/pace-theme-minimal.min.css,plug/spectrum/spectrum.min.css" rel="stylesheet">--><link href="//static.clewm.net/cli/js/lib/pace/themes/blue/pace-theme-minimal.min.css" rel="stylesheet"><link href="//static.clewm.net/cli/js/lib/plug/spectrum/spectrum.min.css" rel="stylesheet"><!--<link href="//static.clewm.net/cli/css/??browserTip.min.css,capacity-nav-info-common.min.css,header_search.min.css?v=1688611800367" rel="stylesheet">--><link href="//static.clewm.net/cli/css/browserTip.min.css?v=1688611800367" rel="stylesheet"><link href="//static.clewm.net/cli/css/cli_message.min.css?v=1688611800367" rel="stylesheet"><link href="//static.clewm.net/cli/css/capacity-nav-info-common.min.css?v=1688611800367" rel="stylesheet"><link href="//static.clewm.net/cli/css/header_search.min.css?v=1688611800367" rel="stylesheet"><link href="//static.clewm.net/cli/css/header_solution.min.css?v=1688611800367" rel="stylesheet"><link href="//static.clewm.net/cli/css/header_support.min.css?v=1688611800367" rel="stylesheet"><!--<script src="//static.clewm.net/cli/js/lib/pace/pace-1.0.2.min.js" data-pace-options="{&#34;ajax&#34;:false,&#34;restartOnPushState&#34;:false}"></script>--><script crossorigin="anonymous">(function(){
-        var STATIC_URL = "//static.clewm.net/cli";
-        var paceOptions = "{&#34;ajax&#34;:false,&#34;restartOnPushState&#34;:false}";
-        if (window.location.pathname !== '/labelEditor') {
-          window.document.write(`<script src="${STATIC_URL}/js/lib/pace/pace-1.0.2.min.js" data-pace-options="${paceOptions}" />`);
-        }
-      }());</script><script crossorigin="anonymous">(function(){
-        if (
-          window.location.pathname === '/labelEditor'
-          && window.location.search.indexOf('mockModal') !== -1
-        ) {
-          document.querySelector('html').classList.add('labelEditorIframeTheme');
-        }
-      }())</script><script crossorigin="anonymous">window.routerBase = "/";</script></head><body><!-- insert-body-upper-code-here --> <input id="has_browserTip_css" type="hidden"> <input id="has_capacity_nav_info_common_css" type="hidden"> <input id="has_capacity_nav_info_common_js" type="hidden"><!-- 伪弹窗样式，给showLabelEidtorIframe页面使用 --><!--<div class="cliLoading mockModal">
-  <div class="ant-spin ant-spin-lg ant-spin-spinning">
-    <span class="ant-spin-dot ant-spin-dot-spin">
-      <i></i><i></i><i></i><i></i>
-    </span>
-  </div>
-</div>--><script src="//static.clewm.net/cli/js/browserTip.min.js?v=1688611800367" crossorigin="anonymous"></script><div id="root"></div><!--<script src="//static.clewm.net/cli/js/lib/??jquery.1.9.1.min.js,plug/jquery.animate-shadow.min.js,plug/jquery.color.min.js,abtp/index.min.js,qiniu-jssdk/3.3.3/qiniu-jssdk.min.js"></script>--><script src="//static.clewm.net/cli/js/lib/jquery.1.9.1.min.js?v=2021092814" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/lib/plug/jquery.animate-shadow.min.js" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/lib/plug/jquery.color.min.js" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/lib/abtp/index.min.js" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/lib/qiniu-jssdk/3.3.3/qiniu-jssdk.min.js" crossorigin="anonymous"></script><!--<script src="//static.clewm.net/cli/js/lib/??ie9/2.5.0/ie9.min.js,react/16.14.0/react.production.min.js,react-dom/16.14.0/react-dom.production.min.js?v=20210515"></script>--><!--<script src="//static.clewm.net/cli/js/??service_text.min.js,consult.min.js,capacity-nav-info-common.min.js,header_search.min.js,preUmi.min.js?v=1688611800367"></script>--><script src="//static.clewm.net/cli/js/service_text.min.js?v=1688611800367" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/consult.min.js?v=1688611800367" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/cli_message.min.js?v=1688611800367" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/capacity-nav-info-common.min.js?v=1688611800367" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/header_search.min.js?v=1688611800367" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/header_solution.min.js?v=1688611800367" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/preUmi.min.js?v=1688611800367" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/spark-md5.min.js?v=1688611800367" crossorigin="anonymous"></script><!-- 右下角工具箱 --><script src="//static.clewm.net/cli/toolbox/toolbox.min.js?v=1688611800367" crossorigin="anonymous"></script><script type="text/javascript" crossorigin="anonymous">(function() {
-  var _paq = window._paq = window._paq || [];
-  var TLD = document.domain.split('.').slice(-2).join('.');
-  var siteIds = {
-    'cli.im': 3,
-    'cliim.net': 2,
-    'cliim.com': 3
-  };
-  var setSiteId = siteIds[TLD] ? siteIds[TLD] : 2;
-  var u = "https://analytics.cli.im/";
-  _paq.push(['setTrackerUrl', u + 'matomo.php']);
-  _paq.push(['setSiteId', setSiteId]);
-  var d = document,
-    g = d.createElement('script'),
-    s = d.getElementsByTagName('script')[0];
-  g.type = 'text/javascript';
-  g.async = true;
-  g.src = '//static.clewm.net/cli/js/matomo.js';
-  s.parentNode.insertBefore(g, s);
-})();</script><script src="//static.clewm.net/nc/react.1ebe7340.async.js" crossorigin="anonymous"></script><script src="//static.clewm.net/nc/lib.be74082e.async.js" crossorigin="anonymous"></script><script src="//static.clewm.net/nc/antd.458e3030.async.js" crossorigin="anonymous"></script><script src="//static.clewm.net/nc/umi.53c33025.js" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/consoleDefer.min.js?v=1688611800367" defer="defer" crossorigin="anonymous"></script><script src="//static.clewm.net/public/cli_analytics.js?v=1688611800367" defer="defer" crossorigin="anonymous"></script><script src="//static.clewm.net/cli/js/chrome-input-file-no-response-tip.js?v=1688611800367" defer="defer" crossorigin="anonymous"></script></body><!--<script src="//static.clewm.net/cli/js/??consoleDefer.min.js,console_get_ip.min.js?v=1688611800367" defer></script>--></html>
+<html>
+<head>
+<title>田长制公示牌</title>
+</head>
+<body>
+<table>
+<tr>
+<th>责任区域</th>
+<td>双峰县甘棠镇罗家坝村</td>
+</tr>
+<tr>
+<th>保护任务</th>
+<td>
+耕地保护面积：1109.04亩<br>
+永久基本农田面积：1052.05亩
+</td>
+</tr>
+<tr>
+<th>乡级田长</th>
+<td>朱铁江 13507388822</td>
+</tr>
+<tr>
+<th>村级田长</th>
+<td>朱乐平 13786814798</td>
+</tr>
+<tr>
+<th>网格田长</th>
+<td>
+第一网格: 朱银香 15273819409<br>
+第二网格: 朱文兵 13787483896<br>
+第三网格: 朱兰香 18073878180<br>
+第四网格: 袁爱平 13875468970<br>
+第五网格: 朱彪辉 18890608035
+</td>
+</tr>
+<tr>
+<th>田长职责</th>
+<td>
+网格田长职责：负责日常巡查，动态掌握所管辖范围内耕地保护利用情况，及时发现、制止、报告违法占用、破坏耕地和将耕地转为其他农用地的行为，开展劝耕促耕行动，对耕地“非农化”“非粮化”和抛荒等行为进行劝诫，对农田设施进行日常管护。
+</td>
+</tr>
+</table>
+</body>
+</html>
