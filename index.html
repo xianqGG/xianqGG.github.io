@@ -16,7 +16,7 @@ table {
 margin: 20px auto;
 width: 80%;
 }
-th, td {
+td {
 border: 1px solid black;
 padding: 10px;
 }
@@ -24,23 +24,14 @@ padding: 10px;
 </head>
 <body>
 <table>
-<tr>
-<th>列1</th>
-<th>列2</th>
-</tr>
 <?php
 $file_content = file_get_contents('https://xianqgg.github.io/测试.txt');
 $lines = explode("\n", file_content);
       foreach (file 
 c
 ​	
- ontent);foreach(lines as $line) {
-$columns = explode(",", line);
-        echo "<tr>";
-        foreach (line);echo"<tr>";foreach(columns as column) {
-          echo "<td>{column}</td>";
-}
-echo "</tr>";
+ ontent);foreach(lines as line) {
+        echo "<tr><td>{line}</td></tr>";
 }
 ?>
 </table>
