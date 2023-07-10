@@ -1,35 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
-    />
-    <title>XGG</title>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      body {
-        /* 居中显示 */
-        text-align: center;
-      }
-      img {
-        /* 图片的最大宽度为 400px */
-        max-width: 100%;
-        width: 400px;
-      }
-    </style>
-  </head>
-  <body>
-    <img src="/qrcode.JPG" alt="">
+<html>
+<head>
+<title>参考网页</title>
+<style>
+body {
+margin: 0;
+padding: 0;
+}
+
+    .iframe-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+    }
     
-      <pre>
-    This is an 新建文本文档 text file.
-    It contains multiple lines of text.
-</pre>
-    
-  </body>
+    .iframe-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
+</head>
+<body>
+<div class="iframe-container">
+<iframe src="https://h5.clewm.net/?url=qr61.cn%2FohvxEO%2FqfWpQFu&hasredirect=1"></iframe>
+</div>
+</body>
 </html>
