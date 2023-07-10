@@ -41,26 +41,25 @@ tfoot {
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>行1</td>
-</tr>
-<tr>
-<td>行2</td>
-</tr>
-<tr>
-<td>行3</td>
-</tr>
-<tr>
-<td>行4</td>
-</tr>
-<tr>
-<td>行5</td>
-</tr>
+<?php
+$file = "your_file.txt"; // Replace with your actual file name
+
+    if(file_exists($file)) {
+      $content = file_get_contents($file);
+      $lines = explode("\n", $content);
+      
+      foreach($lines as $line) {
+        echo "<tr><td>".$line."</td></tr>";
+      }
+    } else {
+      echo "<tr><td>文件不存在</td></tr>";
+    }
+  ?>
 </tbody>
 <tfoot>
-<tr>
-<td colspan="1">天空一声巨响，丰总闪亮登场！</td>
-</tr>
+  <tr>
+    <td colspan="1">天空一声巨响，丰总闪亮登场！</td>
+  </tr>
 </tfoot>
 </table>
 </body>
