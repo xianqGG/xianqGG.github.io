@@ -1,39 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<title>XGG</title>
-<style>
-* {
-padding: 0;
-margin: 0;
-}
-body {
-text-align: center;
-}
-table {
-margin: 20px auto;
-width: 80%;
-}
-td {
-border: 1px solid black;
-padding: 10px;
-}
-</style>
+<title>Text Display Page</title>
 </head>
 <body>
-<table>
-<?php
-$file_content = file_get_contents('https://xianqgg.github.io/测试.txt');
-$lines = explode("\n", file_content);
-      foreach (file 
-c
-​	
- ontent);foreach(lines as line) {
-        echo "<tr><td>{line}</td></tr>";
-}
-?>
-</table>
+<h1>Welcome to the Text Display Page</h1>
+
+<p>This is an example of a simple HTML page that displays text.</p>
+
+<div id="text-container">
+<p id="text"></p>
+</div>
+
+<script>
+// JavaScript code to display text
+var textElement = document.getElementById("text");
+textElement.innerHTML = "Hello, world!";
+</script>
 </body>
 </html>
