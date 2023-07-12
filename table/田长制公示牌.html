@@ -87,7 +87,7 @@ const $table = $('#table');
 const query = new URLSearchParams(location.search.split('?')[1]);
 const path = `田长制公示牌/${query.get('id')}.txt?${Date.now()}`;
 
-let [[title], ...data] = await fetch(path)
+let [[title], ...田长制公示牌] = await fetch(path)
   .then((res) => res.text())
   .catch(() => '')
   .then((str) =>
@@ -102,15 +102,15 @@ let [[title], ...data] = await fetch(path)
           .filter(Boolean),
       ),
   );
-console.log(data);
+console.log(田长制公示牌);
 
-const maxCount = Math.max(...data.map((it) => it.length));
+const maxCount = Math.max(...田长制公示牌.map((it) => it.length));
 
 document.title = title;
 $title.innerHTML = title;
 $table.innerHTML =
   '<tbody>' +
-  data
+  田长制公示牌
     .map((rows) =>
       Array.from({ length: maxCount })
         .map((_, i) => renderItem(rows[i]))
