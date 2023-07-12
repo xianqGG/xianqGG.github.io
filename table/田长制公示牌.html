@@ -3,151 +3,52 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>动感超人</title>
+<title>高大尚页面</title>
 <style>
-* {
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-body {
-  padding: 12px;
-}
-
-.app {
-  width: 400px;
-  max-width: 100%;
+.container {
+  max-width: 800px;
   margin: 0 auto;
+  padding: 40px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#title,
-#tail {
-  background-color: transparent;
-  height: 40px;
-  line-height: 40px;
+h1 {
+  color: #333333;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #666666;
   font-size: 18px;
-  text-align: left;
-}
-
-#table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-tr {
-  height: 40px;
-}
-
-tr:nth-child(even) {
-  background-color: transparent;
-}
-
-tr:not(:last-child) {
-  border-bottom: 1px solid rgba(221, 221, 221, 0.5);
-}
-
-th {
-  font-size: 16px;
-  font-weight: normal;
-  color: #333;
-  padding: 0 4px;
-  text-align: left;
-}
-
-th + th {
-  border-left: 1px solid rgba(221, 221, 221, 0.5);
-}
-
-tr th:first-of-type {
-  font-weight: normal;
-  width: 100px;
-}
-
-a[href^='tel'] {
-  color: #6cf;
+  line-height: 1.5;
 }
 </style>
 </head>
 <body>
-<div class="app">
-<h1 id="title"></h1>
-<table id="table"></table>
-<h1 id="tail"></h1>
+<div class="container">
+  <h1 id="title">标题</h1>
+  <p id="content">内容</p>
 </div>
 
 <script>
-  const tags = {
-    phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
-  };
+  const titleElement = document.getElementById('title');
+  const contentElement = document.getElementById('content');
 
-  const renderItem = (th = '') => {
-    th = th || '';
-    th = th
-      .replace(/\d{4}-\d+/g, tags.phone)
-      .replace(/\d{11}/g, tags.phone);
-    return `<th>${th}</th>`;
-  };
+  const pageTitle = '这是一个高大尚的页面';
+  const pageContent = '欢迎来到我们的高大尚页面，这里展示了一些高质量的内容。';
 
-  const main = async () => {
-    const $ = document.querySelector.bind(document);
-    /**
-     * @type {HTMLElement}
-     */
-    const $title = $('#title');
-    const $tail = $('#tail');
-    /**
-     * @type {HTMLElement}
-     */
-    const $table = $('#table');
-
-    const query = new URLSearchParams(location.search.split('?')[1]);
-    const path = `data2/${query.get('id')}.txt?${Date.now()}`;
-
-    let [[title], ...data] = await fetch(path)
-      .then((res) => res.text())
-      .catch(() => '')
-      .then((str) =>
-        str
-          .split(/^$/gm)
-          .map((it) => it.trim())
-          .filter(Boolean)
-          .map((it) =>
-            it
-              .split(/\n|\r/)
-              .map((subit) => subit.trim())
-              .filter(Boolean),
-          ),
-      );
-    console.log(data);
-    let tail = '';
-    const lastdata = data[data.length - 1];
-    if (lastdata && lastdata.length === 1) {
-      tail = lastdata[0];
-      data = data.slice(0, data.length - 1);
-    }
-
-    const maxCount = Math.max(...data.map((it) => it.length));
-
-    document.title = title;
-    $title.innerHTML = title;
-    $table.innerHTML =
-      '<tbody>' +
-      data
-        .map((rows) =>
-          Array.from({ length: maxCount })
-            .map((_, i) => renderItem(rows[i]))
-            .join(''),
-        )
-        .map((rowStr) => `<tr>${rowStr}</tr>`)
-        .join('') +
-      '</tbody>';
-    $tail.innerHTML = tail;
-  };
-
-  main().catch((err) => {
-    console.error(err);
-    alert('错误：' + err.message);
-  });
+  titleElement.innerText = pageTitle;
+  contentElement.innerText = pageContent;
 </script>
 </body>
 </html>
