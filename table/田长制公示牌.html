@@ -38,17 +38,19 @@ p {
 <div class="container">
   <h1 id="title">标题</h1>
   <p id="content">内容</p>
+  <button onclick="displayElementContent()">显示内容</button>
 </div>
 
 <script>
-  const titleElement = document.getElementById('title');
-  const contentElement = document.getElementById('content');
+  function displayElementContent() {
+    const titleElement = document.getElementById('title');
+    const contentElement = document.getElementById('content');
 
-  const pageTitle = '这是一个高大尚的页面';
-  const pageContent = '欢迎来到我们的高大尚页面，这里展示了一些高质量的内容。';
+    const pageTitle = titleElement.innerText;
+    const pageContent = contentElement.innerText;
 
-  titleElement.innerText = pageTitle;
-  contentElement.innerText = pageContent;
+    alert('标题：' + pageTitle + '\n内容：' + pageContent);
+  }
 </script>
 </body>
 </html>
