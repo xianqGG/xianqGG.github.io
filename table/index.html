@@ -26,8 +26,16 @@ body {
   padding: 12px;
 }
 
+#title {
+  text-align: center;
+}
+
 #table {
   margin-top: 12px;
+}
+
+tr:nth-child(even) {
+  background-color: transparent;
 }
 
 th {
@@ -105,7 +113,7 @@ a[href^='tel'] {
             .map((_, i) => renderItem(rows[i]))
             .join(''),
         )
-        .map((rowStr) => `<tr>${rowStr}</tr>`)
+        .map((rowStr, index) => `<tr ${index % 2 === 0 ? '' : 'style="background-color: transparent;"'}>${rowStr}</tr>`)
         .join('') +
       '</tbody>';
   };
