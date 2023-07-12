@@ -38,19 +38,18 @@ p {
 <div class="container">
   <h1 id="title">标题</h1>
   <p id="content">内容</p>
-  <button onclick="displayElementContent()">显示内容</button>
 </div>
 
 <script>
-  function displayElementContent() {
-    const titleElement = document.getElementById('title');
-    const contentElement = document.getElementById('content');
+  const titleElement = document.getElementById('title');
+  const contentElement = document.getElementById('content');
 
-    const pageTitle = titleElement.innerText;
-    const pageContent = contentElement.innerText;
+  const path = `data2/${query.get('id')}.txt?${Date.now()}`;
+  const pageTitle = path;
+  const pageContent = path;
 
-    alert('标题：' + pageTitle + '\n内容：' + pageContent);
-  }
+  titleElement.innerText = pageTitle;
+  contentElement.innerText = pageContent;
 </script>
 </body>
 </html>
