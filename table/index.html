@@ -21,47 +21,21 @@ body {
 }
 
 #title,
-#tail {
+#table {
   background-color: #f2f2f2;
-  height: 40px;
-  line-height: 40px;
-  font-size: 18px;
-  text-align: center;
-  font-weight: bolder;
+  padding: 12px;
 }
 
 #table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-tr {
-  height: 40px;
-}
-
-tr:nth-child(even) {
-  background-color: transparent;
-}
-
-tr:not(:last-child) {
-  border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+  margin-top: 12px;
 }
 
 th {
   font-size: 16px;
   font-weight: normal;
   color: #333;
-  padding: 0 4px;
+  padding: 4px;
   text-align: left;
-}
-
-th + th {
-  border-left: 1px solid rgba(221, 221, 221, 0.5);
-}
-
-tr th:first-of-type {
-  font-weight: bolder;
-  width: 100px;
 }
 
 a[href^='tel'] {
@@ -73,7 +47,6 @@ a[href^='tel'] {
 <div class="app">
 <h1 id="title"></h1>
 <table id="table"></table>
-<h1 id="tail"></h1>
 </div>
 
 <script>
@@ -95,7 +68,6 @@ a[href^='tel'] {
      * @type {HTMLElement}
      */
     const $title = $('#title');
-    const $tail = $('#tail');
     /**
      * @type {HTMLElement}
      */
@@ -120,12 +92,6 @@ a[href^='tel'] {
           ),
       );
     console.log(data);
-    let tail = '';
-    const lastdata = data[data.length - 1];
-    if (lastdata && lastdata.length === 1) {
-      tail = lastdata[0];
-      data = data.slice(0, data.length - 1);
-    }
 
     const maxCount = Math.max(...data.map((it) => it.length));
 
@@ -142,7 +108,6 @@ a[href^='tel'] {
         .map((rowStr) => `<tr>${rowStr}</tr>`)
         .join('') +
       '</tbody>';
-    $tail.innerHTML = tail;
   };
 
   main().catch((err) => {
