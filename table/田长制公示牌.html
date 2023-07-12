@@ -20,9 +20,15 @@ body {
   margin: 0 auto;
 }
 
-#title,
+#title {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
 #table {
-  padding: 12px;
+  margin-top: 12px;
 }
 
 th {
@@ -100,7 +106,7 @@ a[href^='tel'] {
             .map((_, i) => renderItem(rows[i]))
             .join(''),
         )
-        .map((rowStr, index) => `<tr>${rowStr}</tr>`)
+        .map((rowStr, index) => `<tr>${rowStr}</tr><tr style="border-top: 1px solid #ccc;"></tr>`)
         .join('') +
       '</tbody>';
   };
