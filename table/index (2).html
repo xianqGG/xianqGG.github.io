@@ -22,7 +22,7 @@ body {
 
 #title,
 #table {
-  background-color: transparent;
+  background-color: #f2f2f2;
   padding: 12px;
 }
 
@@ -32,13 +32,6 @@ body {
 
 #table {
   margin-top: 12px;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 8px;
 }
 
 tr:nth-child(even) {
@@ -49,6 +42,7 @@ th {
   font-size: 16px;
   font-weight: normal;
   color: #333;
+  padding: 4px;
   text-align: left;
 }
 
@@ -73,7 +67,7 @@ a[href^='tel'] {
     th = th
       .replace(/\d{4}-\d+/g, tags.phone)
       .replace(/\d{11}/g, tags.phone);
-    return `<td>${th}</td>`;
+    return `<th>${th}</th>`;
   };
 
   const main = async () => {
