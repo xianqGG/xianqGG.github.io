@@ -5,35 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>-</title>
 <style>
+* {
+  margin: 0;
+  padding: 0;
+}
 
-{ margin: 0; padding: 0; }
 body {
-padding: 12px;
+  padding: 12px;
 }
 
 .app {
-width: 400px;
-max-width: 100%;
-margin: 0 auto;
+  width: 400px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 #table {
-background-color: #f2f2f2;
-padding: 12px;
+  background-color: #f2f2f2;
+  padding: 12px;
 }
 
 table {
-border-collapse: collapse;
-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
 }
 
 th, td {
-border: 1px solid #ccc;
-padding: 8px;
+  border-top: 1px solid #ccc;
+  padding: 8px;
 }
 
 tr:nth-child(even) {
-background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 </style>
 </head>
@@ -44,64 +48,63 @@ background-color: #f9f9f9;
 </div>
 
 <script>
-const tags = {
-phone: (phone = '') => <a href="tel:${phone}">${phone}</a>,
-};
+  const tags = {
+    phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
+  };
 
-const renderItem = (th = '') => {
-th = th || '';
-th = th
-.replace(/\d{4}-\d+/g, tags.phone)
-.replace(/\d{11}/g, tags.phone);
-return <th>${th}</th>;
-};
+  const renderItem = (th = '') => {
+    th = th || '';
+    th = th
+      .replace(/\d{4}-\d+/g, tags.phone)
+      .replace(/\d{11}/g, tags.phone);
+    return `<th>${th}</th>`;
+  };
 
-const main = async () => {
-const $ = document.querySelector.bind(document);
-/**
-* @type {HTMLElement}
-*/
-const $table = $('#table');
+  const main = async () => {
+    const $ = document.querySelector.bind(document);
+    /**
+     * @type {HTMLElement}
+     */
+    const $table = $('#table');
 
-const query = new URLSearchParams(location.search.split('?')[1]);
-const path = `data2/${query.get('id')}.txt?${Date.now()}`;
+    const query = new URLSearchParams(location.search.split('?')[1]);
+    const path = `data2/${query.get('id')}.txt?${Date.now()}`;
 
-let [[title], ...data] = await fetch(path)
-  .then((res) => res.text())
-  .catch(() => '')
-  .then((str) =>
-    str
-      .split(/^$/gm)
-      .map((it) => it.trim())
-      .filter(Boolean)
-      .map((it) =>
-        it
-          .split(/\n|\r/)
-          .map((subit) => subit.trim())
-          .filter(Boolean),
-      ),
-  );
-console.log(data);
+    let [[title], ...data] = await fetch(path)
+      .then((res) => res.text())
+      .catch(() => '')
+      .then((str) =>
+        str
+          .split(/^$/gm)
+          .map((it) => it.trim())
+          .filter(Boolean)
+          .map((it) =>
+            it
+              .split(/\n|\r/)
+              .map((subit) => subit.trim())
+              .filter(Boolean),
+          ),
+      );
 
-const maxCount = Math.max(...data.map((it) => it.length));
+    const maxCount = Math.max(...data.map((it) => it.length));
 
-$table.innerHTML =
-  '<tbody>' +
-  data
-    .map((rows) =>
-      Array.from({ length: maxCount })
-        .map((_, i) => renderItem(rows[i]))
-        .join(''),
-    )
-    .map((rowStr, index) => `<tr>${rowStr}</tr>`)
-    .join('') +
-  '</tbody>';
-};
+    $table.innerHTML =
+      '<tbody>' +
+      data
+        .map((rows) =>
+          Array.from({ length: maxCount })
+            .map((_, i) => renderItem(rows[i]))
+            .join(''),
+        )
+        .map((rowStr) => `<tr>${rowStr}</tr><tr><td colspan="${maxCount}"></td></tr>`)
+        .join('') +
+      '</tbody>';
+  };
 
-main().catch((err) => {
-console.error(err);
-alert('错误：' + err.message);
-});
+  main().catch((err) => {
+    console.error(err);
+    alert('错误：' + err.message);
+  });
 </script>
 </body>
 </html>
