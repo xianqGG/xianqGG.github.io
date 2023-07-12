@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>标题内容</title>
+<title>动感超人biubiu</title>
 <style>
 * {
   margin: 0;
@@ -31,7 +31,7 @@ table {
 }
 
 th, td {
-  border: 1px solid #ccc;
+  border-top: 1px solid #ccc;
   padding: 8px;
   text-align: left;
 }
@@ -99,8 +99,8 @@ tr:nth-child(even) {
             .map((_, i) => renderItem(rows[i]))
             .join(''),
         )
-        .map((rowStr) => `<tr>${rowStr}</tr>`)
-        .join('<tr><td colspan="${maxCount}"></td></tr>') +
+        .map((rowStr) => `<tr>${rowStr}</tr><tr><td colspan="${maxCount}"></td></tr>`)
+        .join('') +
       '</tbody>';
   };
 
