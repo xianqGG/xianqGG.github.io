@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>-</title>
+<title id="title">标题内容</title>
 <style>
 * {
   margin: 0;
@@ -34,6 +34,7 @@ table {
 th, td {
   border-top: 1px solid #ccc;
   padding: 8px;
+  text-align: left; /* 左对齐 */
 }
 
 tr:nth-child(even) {
@@ -43,7 +44,7 @@ tr:nth-child(even) {
 </head>
 <body>
 <div class="app">
-<h1 id="title"></h1>
+<h1></h1>
 <table id="table"></table>
 </div>
 
@@ -66,6 +67,7 @@ tr:nth-child(even) {
      * @type {HTMLElement}
      */
     const $table = $('#table');
+    const $pageTitle = $('#title');
 
     const query = new URLSearchParams(location.search.split('?')[1]);
     const path = `data2/${query.get('id')}.txt?${Date.now()}`;
@@ -85,6 +87,8 @@ tr:nth-child(even) {
               .filter(Boolean),
           ),
       );
+
+    $pageTitle.textContent = title;
 
     const maxCount = Math.max(...data.map((it) => it.length));
 
