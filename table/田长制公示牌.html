@@ -26,6 +26,7 @@ margin-bottom: 12px;
 
 #table {
 margin-top: 12px;
+border-collapse: collapse;
 }
 
 th {
@@ -34,15 +35,16 @@ font-weight: normal;
 color: #333;
 padding: 4px;
 text-align: left;
+border: 1px solid #ccc;
+}
+
+td {
+border: 1px solid #ccc;
+padding: 4px;
 }
 
 a[href^='tel'] {
 color: #6cf;
-}
-
-/* 添加行线样式 */
-tr {
-border-top: 1px solid #ccc;
 }
 </style>
 </head>
@@ -100,17 +102,17 @@ const maxCount = Math.max(...data.map((it) => it.length));
 
 document.title = title;
 $title.innerHTML = title;
-
-let tableContent = '';
-data.forEach((rows) => {
-  let rowStr = '';
-  for (let i = 0; i < maxCount; i++) {
-    rowStr += renderItem(rows[i]);
-  }
-  tableContent += `<tr>${rowStr}</tr><tr style="border-top: 1px solid #ccc;"></tr>`;
-});
-
-$table.innerHTML = `<tbody>${tableContent}</tbody>`;
+$table.innerHTML =
+  '<tbody>' +
+  data
+    .map((rows) =>
+      Array.from({ length: maxCount })
+        .map((_, i) => renderItem(rows[i]))
+        .join(''),
+    )
+    .map((rowStr, index) => `<tr>${rowStr}</tr><tr style="border-top: 1px solid #ccc;"></tr>`)
+    .join('') +
+  '</tbody>';
 };
 
 main().catch((err) => {
