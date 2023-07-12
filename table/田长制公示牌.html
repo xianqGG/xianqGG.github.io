@@ -100,17 +100,17 @@ const maxCount = Math.max(...data.map((it) => it.length));
 
 document.title = title;
 $title.innerHTML = title;
-$table.innerHTML =
-  '<tbody>' +
-  data
-    .map((rows) =>
-      Array.from({ length: maxCount })
-        .map((_, i) => renderItem(rows[i]))
-        .join(''),
-    )
-    .map((rowStr, index) => `<tr>${rowStr}</tr>`)
-    .join('') +
-  '</tbody>';
+
+let tableContent = '';
+data.forEach((rows) => {
+  let rowStr = '';
+  for (let i = 0; i < maxCount; i++) {
+    rowStr += renderItem(rows[i]);
+  }
+  tableContent += `<tr>${rowStr}</tr><tr style="border-top: 1px solid #ccc;"></tr>`;
+});
+
+$table.innerHTML = `<tbody>${tableContent}</tbody>`;
 };
 
 main().catch((err) => {
