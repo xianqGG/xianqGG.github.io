@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title id="title">标题内容</title>
+<title>标题内容</title>
 <style>
 * {
   margin: 0;
@@ -26,15 +26,14 @@ body {
 }
 
 table {
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
   width: 100%;
 }
 
 th, td {
-  border-top: 1px solid #ccc;
+  border: 1px solid #ccc;
   padding: 8px;
-  text-align: left; /* 左对齐 */
+  text-align: left;
 }
 
 tr:nth-child(even) {
@@ -44,7 +43,7 @@ tr:nth-child(even) {
 </head>
 <body>
 <div class="app">
-<h1></h1>
+<h1 id="title"></h1>
 <table id="table"></table>
 </div>
 
@@ -58,7 +57,7 @@ tr:nth-child(even) {
     th = th
       .replace(/\d{4}-\d+/g, tags.phone)
       .replace(/\d{11}/g, tags.phone);
-    return `<th>${th}</th>`;
+    return `<td>${th}</td>`;
   };
 
   const main = async () => {
@@ -100,8 +99,8 @@ tr:nth-child(even) {
             .map((_, i) => renderItem(rows[i]))
             .join(''),
         )
-        .map((rowStr) => `<tr>${rowStr}</tr><tr><td colspan="${maxCount}"></td></tr>`)
-        .join('') +
+        .map((rowStr) => `<tr>${rowStr}</tr>`)
+        .join('<tr><td colspan="${maxCount}"></td></tr>') +
       '</tbody>';
   };
 
