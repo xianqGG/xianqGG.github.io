@@ -20,50 +20,31 @@ body {
   margin: 0 auto;
 }
 
-#title,
 #table {
-  background-color: transparent;
+  background-color: #f2f2f2;
   padding: 12px;
 }
 
-#title {
-  text-align: center;
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-#table {
-  margin-top: 12px;
-  border-collapse: collapse;
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
 }
 
 tr:nth-child(even) {
-  background-color: transparent;
-}
-
-th {
-  font-size: 16px;
-  font-weight: normal;
-  color: #333;
-  padding: 4px;
-  text-align: left;
-  border-bottom: 1px solid #000000; /* 将分割线颜色改为 K40 */
-}
-
-td {
-  font-size: 14px;
-  line-height: 1.5;
-  padding: 6px;
-  border-bottom: 1px solid #000000; /* 将分割线颜色改为 K40 */
-}
-
-a[href^='tel'] {
-  color: #6cf;
+  background-color: #f9f9f9;
 }
 </style>
 </head>
 <body>
 <div class="app">
 <h1 id="title"></h1>
-<table id="table"><tbody></tbody></table>
+<table id="table"></table>
 </div>
 
 <script>
@@ -71,12 +52,12 @@ a[href^='tel'] {
     phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
   };
 
-  const renderItem = (td = '') => {
-    td = td || '';
-    td = td
+  const renderItem = (th = '') => {
+    th = th || '';
+    th = th
       .replace(/\d{4}-\d+/g, tags.phone)
       .replace(/\d{11}/g, tags.phone);
-    return `<td>${td}</td>`;
+    return `<td>${th}</td>`;
   };
 
   const main = async () => {
@@ -84,11 +65,8 @@ a[href^='tel'] {
     /**
      * @type {HTMLElement}
      */
-    const $title = $('#title');
-    /**
-     * @type {HTMLElement}
-     */
     const $table = $('#table');
+    const $pageTitle = $('#title');
 
     const query = new URLSearchParams(location.search.split('?')[1]);
     const path = `data2/${query.get('id')}.txt?${Date.now()}`;
@@ -108,21 +86,22 @@ a[href^='tel'] {
               .filter(Boolean),
           ),
       );
-    console.log(data);
+
+    $pageTitle.textContent = title;
 
     const maxCount = Math.max(...data.map((it) => it.length));
 
-    document.title = title;
-    $title.innerHTML = title;
     $table.innerHTML =
+      '<tbody>' +
       data
         .map((rows) =>
           Array.from({ length: maxCount })
-            .map((_, i) => renderItem(i === 0 ? rows[i] : ''))
+            .map((_, i) => renderItem(rows[i]))
             .join(''),
         )
-        .map((rowStr, index) => `<tr ${index % 2 === 0 ? '' : 'style="background-color: transparent;"'}>${rowStr}</tr>`)
-        .join('');
+        .map((rowStr) => `<tr>${rowStr}</tr>`)
+        .join('<tr><td colspan="${maxCount}"></td></tr>') +
+      '</tbody>';
   };
 
   main().catch((err) => {
