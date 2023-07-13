@@ -5,108 +5,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>动感超人</title>
 <style>
-/* 全局样式 */
 * {
   margin: 0;
   padding: 0;
 }
 
 body {
-  padding: 12px; /* 设置页面内边距为12像素，用于增加内容与页面边缘的距离 */
+  padding: 12px;
 }
 
 .app {
-  width: 400px; /* 设置app容器的宽度为400像素 */
-  max-width: 100%; /* 设置app容器的最大宽度为100%，以便在小屏幕上自适应调整宽度 */
-  margin: 0 auto; /* 设置app容器水平居中显示 */
+  width: 400px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-/* 标题和尾部样式 */
 #title,
 #tail {
-  background-color: #f2f2f2; /* 设置背景颜色为淡灰色 */
-  height: 40px; /* 设置高度为40像素 */
-  line-height: 40px; /* 设置行高为40像素，使文本垂直居中显示 */
-  font-size: 26px; /* 设置字体大小为26像素 */
-  text-align: center; /* 设置文本水平居中显示 */
-  font-weight: bolder; /* 设置字体加粗 */
+  background-color: #f2f2f2;
+  height: 40px;
+  line-height: 40px;
+  font-size: 26px;
+  text-align: center;
+  font-weight: bolder;
 }
 
-/* 表格样式 */
 #table {
-  width: 100%; /* 设置表格宽度为100% */
-  border-collapse: collapse; /* 合并单元格的边框 */
+  width: 100%;
+  border-collapse: collapse;
 }
 
 tr {
-  height: 40px; /* 设置表格行的高度为40像素 */
+  height: 70px;
 }
 
 tr:nth-child(even) {
-  background-color: transparent; /* 设置偶数行的背景颜色为透明，即不设置背景色 */
+  background-color: transparent;
 }
 
 tr:not(:last-child) {
-  border-bottom: 1px solid rgba(221, 221, 221, 0.5); /* 设置除最后一行外的其他行底部边框样式为灰色实线 */
+  border-bottom: 1px solid rgba(221, 221, 221, 0.5);
 }
 
 th {
-  font-size: 16px; /* 设置表头单元格字体大小为16像素 */
-  font-weight: normal; /* 设置表头单元格字体为普通（非加粗） */
-  color: #333; /* 设置表头单元格字体颜色为深灰色 */
-  padding: 0 4px; /* 设置表头单元格内边距为0上下、4像素左右 */
-  text-align: left; /* 设置表头单元格文本左对齐 */
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+  padding: 0 4px;
+  text-align: left;
 }
 
 th + th {
-  border-left: 1px solid rgba(221, 221, 221, 0.5); /* 设置表头单元格之间的边框样式为灰色实线 */
+  border-left: 1px solid rgba(221, 221, 221, 0.5);
 }
 
-/* 第一列表头样式 */
 tr th:first-of-type {
-  font-weight: bolder; /* 设置第一列表头单元格的字体加粗 */
-  width: 40px; /* 设置第一列表头单元格的宽度为40像素 */
+  font-weight: bolder;
+  width: 100px;
 }
 
 a[href^='tel'] {
-  color: #6cf; /* 设置具有以"tel"开头的链接文本颜色为蓝色 */
+  color: #6cf;
 }
 
-/* 尾部部分样式 */
+/* 尾部部分 */
 #tail {
-  font-size: 18px; /* 设置尾部部分的字体大小为18像素 */
-  background-color: transparent; /* 设置尾部部分的背景颜色为透明，即不设置背景色 */
+  font-size: 18px;
+  background-color: transparent;
 }
 </style>
 </head>
 <body>
 <div class="app">
-<!-- 标题部分 -->
-<h1 id="title">动感超人</h1>
-<!-- 表格部分 -->
-<table id="table">
-  <tr>
-    <th>姓名</th>
-    <th>年龄</th>
-    <th>电话号码</th>
-  </tr>
-  <tr>
-    <td>张三</td>
-    <td>20</td>
-    <td><a href="tel:1234567890">1234567890</a></td>
-  </tr>
-  <tr>
-    <td>李四</td>
-    <td>25</td>
-    <td><a href="tel:9876543210">9876543210</a></td>
-  </tr>
-</table>
-<!-- 尾部部分 -->
-<h1 id="tail">版权所有 © 动感超人</h1>
+<h1 id="title"></h1>
+<table id="table"></table>
+<h1 id="tail"></h1>
 </div>
 
 <script>
-  // JavaScript代码省略...
+  const tags = {
+    phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
+  };
+
+  const renderItem = (th = '') => {
+    th = th || '';
+    th = th
+      .replace(/\d{4}-\d+/g, tags.phone)
+      .replace(/\d{11}/g, tags.phone);
+    return `<th>${th}</th>`;
+  };
+
+  const main = async () => {
+    const $ = document.querySelector.bind(document);
+    /**
+     * @type {HTMLElement}
+     */
+    const $title = $('#title');
+    const $tail = $('#tail');
+    /**
+     * @type {HTMLElement}
+     */
+    const $table = $('#table');
+
+    const query = new URLSearchParams(location.search.split('?')[1]);
+    const path = `data/${query.get('id')}.txt?${Date.now()}`;
+
+    let [[title], ...data] = await fetch(path)
+      .then((res) => res.text())
+      .catch(() => '')
+      .then((str) =>
+        str
+          .split(/^$/gm)
+          .map((it) => it.trim())
+          .filter(Boolean)
+          .map((it) =>
+            it
+              .split(/\n|\r/)
+              .map((subit) => subit.trim())
+              .filter(Boolean),
+          ),
+      );
+    console.log(data);
+    let tail = '';
+    const lastdata = data[data.length - 1];
+    if (lastdata && lastdata.length === 1) {
+      tail = lastdata[0];
+      data = data.slice(0, data.length - 1);
+    }
+
+    const maxCount = Math.max(...data.map((it) => it.length));
+
+    document.title = title;
+    $title.innerHTML = title;
+    $table.innerHTML =
+      '<tbody>' +
+      data
+        .map((rows) =>
+          Array.from({ length: maxCount })
+            .map((_, i) => renderItem(rows[i]))
+            .join(''),
+        )
+        .map((rowStr) => `<tr>${rowStr}</tr>`)
+        .join('') +
+      '</tbody>';
+    $tail.innerHTML = tail;
+  };
+
+  main().catch((err) => {
+    console.error(err);
+    alert('错误：' + err.message);
+  });
 </script>
 </body>
 </html>
