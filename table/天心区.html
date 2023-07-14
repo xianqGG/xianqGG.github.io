@@ -102,7 +102,7 @@ a[href^='tel'] {
     const $table = $('#table');
 
     const query = new URLSearchParams(location.search.split('?')[1]);
-    const path = `data2/${query.get('id')}.txt?${Date.now()}`;
+    const path = `天心区/${query.get('id')}.txt?${Date.now()}`;
 
     let [[title], ...data] = await fetch(path)
       .then((res) => res.text())
