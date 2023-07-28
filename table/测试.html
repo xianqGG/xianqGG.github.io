@@ -5,7 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>田长制公示牌</title>
 <style>
-/* CSS样式部分 */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 12px;
+}
+
+.app {
+  width: 700px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+#title,
+#tail {
+  background-color: #f2f2f2;
+  height: 40px;
+  line-height: 40px;
+  font-size: 26px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+#table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr {
+  height: 30px;
+}
+
+tr:nth-child(even) {
+  background-color: transparent;
+}
+
+tr:not(:last-child) {
+  border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+}
+
+th {
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+  padding: 0 4px;
+  text-align: left;
+}
+
+th + th {
+  border-left: 1px solid rgba(221, 221, 221, 0.5);
+}
+
+tr th:first-of-type {
+  font-weight: bolder;
+  width: 68px;
+}
+
+a[href^='tel'] {
+  color: #6cf;
+}
 </style>
 </head>
 <body>
@@ -16,21 +77,32 @@
 </div>
 
 <script>
-  // JavaScript代码部分
   const tags = {
     phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
   };
 
-  const renderItem = (cell = '') => {
-    cell = cell || '';
-    cell = cell.replace(/&/g, '\n');
-    return `<td>${cell}</td>`;
+  const renderItem = (th = '') => {
+    th = th || '';
+    th = th
+      .replace(/\d{4}-\d+/g, tags.phone)
+      .replace(/\d{11}/g, tags.phone);
+    return `<th>${th}</th>`;
+  };
+
+  const formatData = (data) => {
+    return data.map((row) => row.map((cell) => cell.replace(/&/g, "<br/>")));
   };
 
   const main = async () => {
     const $ = document.querySelector.bind(document);
+    /**
+     * @type {HTMLElement}
+     */
     const $title = $('#title');
     const $tail = $('#tail');
+    /**
+     * @type {HTMLElement}
+     */
     const $table = $('#table');
 
     const query = new URLSearchParams(location.search.split('?')[1]);
@@ -52,10 +124,7 @@
           ),
       );
 
-    // 处理数据中的换行符
-    data = data.map((rows) =>
-      rows.map((cell) => cell.replace(/&/g, '\n'))
-    );
+    data = formatData(data);
 
     let tail = '';
     const lastdata = data[data.length - 1];
