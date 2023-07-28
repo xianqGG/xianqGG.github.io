@@ -89,6 +89,10 @@ a[href^='tel'] {
     return `<th>${th}</th>`;
   };
 
+  const formatData = (data) => {
+    return data.map((row) => row.map((cell) => cell.replace(/&/g, "<br/>")));
+  };
+
   const main = async () => {
     const $ = document.querySelector.bind(document);
     /**
@@ -119,7 +123,9 @@ a[href^='tel'] {
               .filter(Boolean),
           ),
       );
-    console.log(data);
+
+    data = formatData(data);
+
     let tail = '';
     const lastdata = data[data.length - 1];
     if (lastdata && lastdata.length === 1) {
