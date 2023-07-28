@@ -21,12 +21,10 @@
     phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
   };
 
-  const renderItem = (th = '') => {
-    th = th || '';
-    th = th
-      .replace(/\d{4}-\d+/g, tags.phone)
-      .replace(/\d{11}/g, tags.phone);
-    return `<th>${th}</th>`;
+  const renderItem = (cell = '') => {
+    cell = cell || '';
+    cell = cell.replace(/&/g, '\n');
+    return `<td>${cell}</td>`;
   };
 
   const main = async () => {
