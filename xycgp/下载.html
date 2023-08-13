@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="src/favicon.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>qrcode</title>
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+<script>
+// Get the current directory URL
+var currentDirectory = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+
+// Function to trigger file download
+function downloadFile(filename) {
+    var element = document.createElement('a');
+    element.setAttribute('href', currentDirectory + filename);
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
+// Example usage: downloadFile('file.jpg');
+</script>
+</body>
+</html>
