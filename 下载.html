@@ -1,125 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<title>文件下载</title>
-<style>
-body {
-font-family: Arial, sans-serif;
-margin: 20px;
-}
-
-ul {
-  list-style-type: none;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
-.download-btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-</style>
+    <title>文件下载</title>
 </head>
-
 <body>
-<h1>文件下载列表</h1>
-<ul id="file-list"></ul>
+    <h1>文件下载</h1>
 
-<script>
-window.addEventListener('DOMContentLoaded', (event) => {
-const fileList = document.getElementById('file-list');
-
-  // 获取当前目录下所有文件
-  fetch('./xycgp/')
-    .then(response => response.text())
-    .then(data => {
-      const parser = new DOMParser();
-      const htmlDocument = parser.parseFromString(data, 'text/html');
-      const fileLinks = htmlDocument.querySelectorAll('a');
-
-      fileLinks.forEach(link => {
-        if (link.href.endsWith('/')) {
-          // 文件夹链接，递归获取文件夹内文件
-          const folderUrl = link.href;
-          fetch(folderUrl)
-            .then(response => response.text())
-            .then(folderData => {
-              const folderParser = new DOMParser();
-              const folderHtmlDocument = folderParser.parseFromString(folderData, 'text/html');
-              const folderFileLinks = folderHtmlDocument.querySelectorAll('a');
-
-              folderFileLinks.forEach(folderLink => {
-                const fileName = folderLink.textContent;
-                const fileUrl = folderUrl + fileName;
-
-                const li = document.createElement('li');
-                const fileLink = document.createElement('a');
-                const downloadBtn = document.createElement('button');
-
-                fileLink.textContent = fileName;
-                fileLink.href = fileUrl;
-                fileLink.target = '_blank';
-                downloadBtn.textContent = '下载';
-                downloadBtn.className = 'download-btn';
-                downloadBtn.addEventListener('click', () => {
-                  downloadFile(fileUrl);
-                });
-
-                li.appendChild(fileLink);
-                li.appendChild(downloadBtn);
-                fileList.appendChild(li);
-              });
-            })
-            .catch(error => {
-              console.log('Error: ', error);
-            });
-        } else {
-          // 文件链接
-          const fileName = link.textContent;
-          const fileUrl = link.href;
-
-          const li = document.createElement('li');
-          const fileLink = document.createElement('a');
-          const downloadBtn = document.createElement('button');
-
-          fileLink.textContent = fileName;
-          fileLink.href = fileUrl;
-          fileLink.target = '_blank';
-          downloadBtn.textContent = '下载';
-          downloadBtn.className = 'download-btn';
-          downloadBtn.addEventListener('click', () => {
-            downloadFile(fileUrl);
-          });
-
-          li.appendChild(fileLink);
-          li.appendChild(downloadBtn);
-          fileList.appendChild(li);
-        }
-      });
-    })
-    .catch(error => {
-      console.log('Error: ', error);
-    });
-
-  function downloadFile(url) {
-    const element = document.createElement('a');
-    element.href = url;
-    element.download = url.split('/').pop();
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  }
-});
-
-</script>
+    <ul>
+        <li><a href="/xycgp/调试.exe" download>调试</a></li>
+    </ul>
 </body>
-
 </html>
