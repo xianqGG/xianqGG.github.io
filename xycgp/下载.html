@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 const fileList = document.getElementById('file-list');
 
   // 获取当前目录下所有文件
-  fetch('./')
+  fetch('./xycgp/')
     .then(response => response.text())
     .then(data => {
       const parser = new DOMParser();
@@ -46,7 +46,7 @@ const fileList = document.getElementById('file-list');
 
       fileLinks.forEach(link => {
         const fileName = link.textContent;
-        const fileUrl = link.href;
+        const fileUrl = './xycgp/' + fileName;
 
         const li = document.createElement('li');
         const fileLink = document.createElement('a');
