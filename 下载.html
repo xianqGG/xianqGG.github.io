@@ -45,25 +45,63 @@ const fileList = document.getElementById('file-list');
       const fileLinks = htmlDocument.querySelectorAll('a');
 
       fileLinks.forEach(link => {
-        const fileName = link.textContent;
-        const fileUrl = './xycgp/' + fileName;
+        if (link.href.endsWith('/')) {
+          // 文件夹链接，递归获取文件夹内文件
+          const folderUrl = link.href;
+          fetch(folderUrl)
+            .then(response => response.text())
+            .then(folderData => {
+              const folderParser = new DOMParser();
+              const folderHtmlDocument = folderParser.parseFromString(folderData, 'text/html');
+              const folderFileLinks = folderHtmlDocument.querySelectorAll('a');
 
-        const li = document.createElement('li');
-        const fileLink = document.createElement('a');
-        const downloadBtn = document.createElement('button');
+              folderFileLinks.forEach(folderLink => {
+                const fileName = folderLink.textContent;
+                const fileUrl = folderUrl + fileName;
 
-        fileLink.textContent = fileName;
-        fileLink.href = fileUrl;
-        fileLink.target = '_blank';
-        downloadBtn.textContent = '下载';
-        downloadBtn.className = 'download-btn';
-        downloadBtn.addEventListener('click', () => {
-          downloadFile(fileUrl);
-        });
+                const li = document.createElement('li');
+                const fileLink = document.createElement('a');
+                const downloadBtn = document.createElement('button');
 
-        li.appendChild(fileLink);
-        li.appendChild(downloadBtn);
-        fileList.appendChild(li);
+                fileLink.textContent = fileName;
+                fileLink.href = fileUrl;
+                fileLink.target = '_blank';
+                downloadBtn.textContent = '下载';
+                downloadBtn.className = 'download-btn';
+                downloadBtn.addEventListener('click', () => {
+                  downloadFile(fileUrl);
+                });
+
+                li.appendChild(fileLink);
+                li.appendChild(downloadBtn);
+                fileList.appendChild(li);
+              });
+            })
+            .catch(error => {
+              console.log('Error: ', error);
+            });
+        } else {
+          // 文件链接
+          const fileName = link.textContent;
+          const fileUrl = link.href;
+
+          const li = document.createElement('li');
+          const fileLink = document.createElement('a');
+          const downloadBtn = document.createElement('button');
+
+          fileLink.textContent = fileName;
+          fileLink.href = fileUrl;
+          fileLink.target = '_blank';
+          downloadBtn.textContent = '下载';
+          downloadBtn.className = 'download-btn';
+          downloadBtn.addEventListener('click', () => {
+            downloadFile(fileUrl);
+          });
+
+          li.appendChild(fileLink);
+          li.appendChild(downloadBtn);
+          fileList.appendChild(li);
+        }
       });
     })
     .catch(error => {
