@@ -4,6 +4,10 @@
 <title>双峰县田长制</title>
 </head>
 <body>
-<img src="双峰县.html?id=1WG" alt="双峰县田长制图片">
+<script>
+const query = new URLSearchParams(location.search.split('?')[1]);
+const imageSrc = 双峰县/${query.get('id')}.jpg?${Date.now()};
+document.write(<img src="${imageSrc}" alt="">);
+</script>
 </body>
 </html>
