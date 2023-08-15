@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>双峰县田长制</title>
+<title>双峰县图片</title>
 </head>
 <body>
 <script>
 const query = new URLSearchParams(location.search.split('?')[1]);
 const imageSrc = 双峰县/${query.get('id')}.jpg?${Date.now()};
-document.write(<img src="${imageSrc}" alt="">);
+const imgElement = document.createElement('img');
+imgElement.src = imageSrc;
+imgElement.alt = '双峰县图片';
+document.body.appendChild(imgElement);
 </script>
 </body>
 </html>
