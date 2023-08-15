@@ -5,47 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>显示图片</title>
 <style>
-
-    { margin: 0; padding: 0; }
+* {
+  margin: 0;
+  padding: 0;
+}
 
 body {
-padding: 12px;
+  padding: 12px;
 }
 
 .app {
-width: 700px;
-max-width: 100%;
-margin: 0 auto;
+  width: 700px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 #image-container {
-text-align: center;
+  text-align: center;
 }
 
 img {
-max-width: 100%;
-height: auto;
-margin: 12px 0;
+  max-width: 100%;
+  height: auto;
+  margin: 12px 0;
 }
 </style>
 </head>
 <body>
 <div class="app">
-<h1>显示图片</h1>
-<div id="image-container"></div>
+  <h1>显示图片</h1>
+  <div id="image-container"></div>
 </div>
 
 <script>
-const query = new URLSearchParams(location.search);
-const imageId = query.get('id');
-const imageUrl = 双峰县/${imageId}.jpg;
+  const query = new URLSearchParams(location.search);
+  const imageId = query.get('id');
+  const imageUrl = `https://xianqgg.github.io/table/双峰县/${imageId}.jpg`;
 
-const $imageContainer = document.getElementById('image-container');
-const imageElement = document.createElement('img');
-imageElement.src = imageUrl;
-imageElement.alt = imageId;
-
-$imageContainer.appendChild(imageElement);
+  const $imageContainer = document.getElementById('image-container');
+  const imageElement = document.createElement('img');
+  imageElement.src = imageUrl;
+  imageElement.alt = imageId;
+  
+  $imageContainer.appendChild(imageElement);
 </script>
 </body>
 </html>
