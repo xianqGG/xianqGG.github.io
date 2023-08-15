@@ -1,3 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>双峰县</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+}
+
+body {
+  padding: 12px;
+}
+
+.app {
+  width: 700px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+#title,
+#tail {
+  background-color: #f2f2f2;
+  height: 40px;
+  line-height: 40px;
+  font-size: 26px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+#table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr {
+  height: 30px;
+}
+
+tr:nth-child(even) {
+  background-color: transparent;
+}
+
+tr:not(:last-child) {
+  border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+}
+
+th {
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+  padding: 0 4px;
+  text-align: left;
+}
+
+th + th {
+  border-left: 1px solid rgba(221, 221, 221, 0.5);
+}
+
+tr th:first-of-type {
+  font-weight: bolder;
+  width: 68px;
+}
+
+a[href^='tel'] {
+  color: #6cf;
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+<h1 id="title"></h1>
+<table id="table"></table>
+<h1 id="tail"></h1>
+</div>
+
+<script>
+const tags = {
+phone: (phone = '') => <a href="tel:${phone}">${phone}</a>,
+};
+
+const renderItem = (th = '') => {
+  th = th || '';
+  th = th
+    .replace(/\d{4}-\d+/g, tags.phone)
+    .replace(/\d{11}/g, tags.phone);
+  return `<th>${th}</th>`;
+};
+
+const formatData = (data) => {
+  return data.map((row) => row.map((cell) => cell.replace(/&/g, "<br/>")));
+};
+
 const main = async () => {
   const $ = document.querySelector.bind(document);
   /**
@@ -11,9 +107,10 @@ const main = async () => {
   const $table = $('#table');
 
   const query = new URLSearchParams(location.search.split('?')[1]);
-  const url = `https://example.com/${query.get('id')}.txt`;
+  const imageId = query.get('id');
+  const path = `双峰县/${imageId}.txt?${Date.now()}`;
 
-  let [[title], ...data] = await fetch(url)
+  let [[title], ...data] = await fetch(path)
     .then((res) => res.text())
     .catch(() => '')
     .then((str) =>
@@ -54,12 +151,13 @@ const main = async () => {
       .join('') +
     '</tbody>';
   $tail.innerHTML = tail;
-
-  // 打开txt文件内的网址
-  window.open(url, '_blank');
 };
 
 main().catch((err) => {
   console.error(err);
   alert('错误：' + err.message);
 });
+
+</script>
+</body>
+</html>
