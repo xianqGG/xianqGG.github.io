@@ -1,29 +1,44 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Dynamic Image Loading</title>
-</head>
-<body>
-  <div id="pic"></div>
-
-  <script>
-    const searchParams = new URLSearchParams(window.location.search);
-    const id = searchParams.get("id");
-    const fileExtension = searchParams.get("extension");
-
-    const pathnameArray = window.location.pathname.split("/");
-    const fileName = pathnameArray[pathnameArray.length - 1].replace(/\.[^/.]+$/, "");
-
-    const picElement = document.getElementById("pic");
-
-    const imageExtensions = [".jpg", ".png", ".jpeg"];
-    const imageSources = imageExtensions.map(extension => {
-      return `<source srcset="${fileName}${extension}" type="image/${extension.substr(1)}">`;
-    }).join("");
-
-    const imageElement = `<img src="${fileName}${fileExtension}" alt="Dynamic Image" >`;
-
-    picElement.innerHTML = `${imageSources}${imageElement}`;
-  </script>
-</body>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>双峰县田长制</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #pic {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #000;
+      }
+      #pic img {
+        object-fit: contain;
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <picture id="pic"> </picture>
+    <script>
+      const query = new URLSearchParams(location.search);
+      const suffix = (location.pathname.split("/").at(-1) || "").replace(
+        /\.html$/i,
+        ""
+      );
+      const id = query.get("id");
+      const $pic = document.getElementById("pic");
+      $pic.innerHTML =
+        [".jpg", ".png", ".jpeg"]
+          .map((ext) => suffix + "/" + id + ext)
+          .map((src) => `<source srcset="${src}" />`)
+          .join("") + "<img>";
+    </script>
+  </body>
 </html>
