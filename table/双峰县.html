@@ -23,7 +23,8 @@
       const $pic = document.getElementById("pic");
       $pic.innerHTML = [".jpg", ".png", ".jpeg"]
         .map((ext) => suffix + "/" + id + ext)
-        .map((src) => `<source srcset="${src}" />`);
+        .map((src) => `<source srcset="${src}" />`)
+        .join('');
     </script>
   </body>
 </html>
