@@ -5,8 +5,9 @@
 </head>
 <body>
 <script>
-const query = new URLSearchParams(location.search.split('?')[1]);
-const imageSrc = 双峰县/${query.get('id')}.jpg?${Date.now()};
+const query = new URLSearchParams(location.search);
+const id = query.get('id');
+const imageSrc = https://xianqgg.github.io/table/双峰县/${id}.jpg;
 const imgElement = document.createElement('img');
 imgElement.src = imageSrc;
 imgElement.alt = '双峰县图片';
