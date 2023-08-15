@@ -1,16 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<link rel="icon" type="image/svg+xml" href="src/favicon.svg" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>qrcode</title>
-</head>
-<body>
-<div id="root"></div>
-<script type="module" src="/src/main.tsx"></script>
-<script>
-window.location.href = "https://xianqgg.github.io/%E4%B8%8B%E8%BD%BD.html";
-</script>
-</body>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>双峰县田长制</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #pic {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #000;
+      }
+      #pic img {
+        object-fit: contain;
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <picture id="pic"> </picture>
+    <script>
+      const query = new URLSearchParams(location.search);
+      const suffix = (location.pathname.split("/").at(-1) || "").replace(
+        /\.html$/i,
+        ""
+      );
+      const id = query.get("id");
+      const $pic = document.getElementById("pic");
+      $pic.innerHTML =
+        [".jpg", ".png", ".jpeg"]
+          .map((ext) => suffix + "/" + id + ext)
+          .map((src) => `<source srcset="${src}" />`)
+          .join("") + "<img>";
+    </script>
+  </body>
 </html>
