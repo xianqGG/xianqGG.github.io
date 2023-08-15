@@ -116,7 +116,7 @@ a[href^='tel'] {
 
     const query = new URLSearchParams(location.search.split('?')[1]);
     const imageId = query.get('id');
-    const path = `双峰县/${imageId}.jpg?${Date.now()}`;
+ 
 
     let [[title], ...data] = await fetch(path)
       .then((res) => res.text())
