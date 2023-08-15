@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>双峰县图片</title>
+  <title>双峰县图片</title>
 </head>
 <body>
-<script>
-const query = new URLSearchParams(location.search);
-const id = query.get('id');
-const imageSrc = https://xianqgg.github.io/table/双峰县/${id}.jpg;
-</script>
+  <script>
+    const query = new URLSearchParams(location.search);
+    const id = query.get('id');
+    const imageSrc = `https://xianqgg.github.io/table/双峰县/${id}.jpg`;
+    const imgElement = document.createElement('img');
+    imgElement.src = imageSrc;
+    imgElement.alt = '双峰县图片';
+    document.body.appendChild(imgElement);
+  </script>
 </body>
 </html>
