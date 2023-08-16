@@ -12,7 +12,7 @@
     }
 
     body {
-      background-color: #F5F5DC;
+      background-color: #f5f5dc;
     }
 
     #pic {
@@ -26,6 +26,11 @@
       object-fit: contain;
       width: 100%;
       height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    #pic.fullscreen img {
+      transform: rotate(90deg);
     }
 
     .app {
@@ -171,6 +176,7 @@
         } else if ($pic.msRequestFullscreen) {
           $pic.msRequestFullscreen();
         }
+        $pic.classList.toggle("fullscreen");
       });
     };
 
