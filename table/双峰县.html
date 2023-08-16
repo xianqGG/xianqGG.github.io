@@ -17,7 +17,7 @@
 
     #pic {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
       margin-top: 25px;
     }
@@ -76,25 +76,27 @@
 </head>
 
 <body>
-  <picture id="pic"></picture>
+  <div id="pic">
+    <img src="your-image.jpg" alt="Image" />
+  </div>
   <div class="app">
     <table id="table"></table>
     <h1 id="tail"></h1>
   </div>
 
   <script>
-    const query = new URLSearchParams(location.search);
-    const suffix = (location.pathname.split("/").at(-1) || "").replace(
-      /\.html$/i,
-      ""
-    );
-    const id = query.get("id");
     const $pic = document.getElementById("pic");
-    $pic.innerHTML =
-      [".jpg", ".png", ".jpeg"]
-        .map((ext) => suffix + "/" + id + ext)
-        .map((src) => `<source srcset="${src}" />`)
-        .join("") + "<img>";
+    $pic.addEventListener("click", function () {
+      if ($pic.requestFullscreen) {
+        $pic.requestFullscreen();
+      } else if ($pic.mozRequestFullScreen) {
+        $pic.mozRequestFullScreen();
+      } else if ($pic.webkitRequestFullscreen) {
+        $pic.webkitRequestFullscreen();
+      } else if ($pic.msRequestFullscreen) {
+        $pic.msRequestFullscreen();
+      }
+    });
 
     const tags = {
       phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
@@ -117,8 +119,7 @@
       const $tail = $('#tail');
       const $table = $('#table');
 
-      const query = new URLSearchParams(location.search.split('?')[1]);
-      const path = `双峰县/${query.get('id')}.txt?${Date.now()}`;
+      const path = "your-data.txt";
 
       let [[title], ...data] = await fetch(path)
         .then((res) => res.text())
