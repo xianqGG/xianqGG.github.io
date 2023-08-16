@@ -17,7 +17,7 @@
 
     #pic {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
       margin-top: 25px;
     }
@@ -26,6 +26,7 @@
       object-fit: contain;
       width: 100%;
       height: auto;
+      cursor: pointer;
     }
 
     .app {
@@ -111,14 +112,15 @@
     const formatData = (data) => {
       return data.map((row) => row.map((cell) => cell.replace(/&/g, "<br/>")));
     };
-    
-    const toggleFullScreen = (element) => {
-      if (element.requestFullscreen) {
-        element.requestFullscreen();
-      } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-      } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
+
+    const toggleFullScreen = () => {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
       }
     };
 
@@ -172,9 +174,7 @@
       $tail.innerHTML = tail;
 
       const $image = document.getElementById('image');
-      $image.addEventListener('click', function() {
-        toggleFullScreen($image);
-      });
+      $image.addEventListener('click', toggleFullScreen);
     };
 
     main().catch((err) => {
