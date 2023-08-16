@@ -99,7 +99,20 @@
     const tags = {
       phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
     };
-
+$image.addEventListener("click", () => {
+  $image.classList.toggle("landscape"); // 切换图片的横屏显示状态
+  $image.classList.toggle("fullscreen"); // 切换图片的全屏显示状态
+  if (
+    !$image.classList.contains("fullscreen") &&
+    !$app.classList.contains("fullscreen")
+  ) {
+    $app.classList.remove("fullscreen");
+    document.documentElement.exitFullscreen();
+  } else {
+    $app.classList.add("fullscreen");
+    document.documentElement.requestFullscreen();
+  }
+});
     const renderItem = (th = '') => {
       th = th || '';
       th = th
