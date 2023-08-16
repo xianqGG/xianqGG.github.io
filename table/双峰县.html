@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +11,7 @@
     }
 
     body {
-      background-color: #F5F5DC;
+      background-color: #f5f5dc;
     }
 
     #pic {
@@ -27,6 +26,18 @@
       width: 100%;
       height: auto;
       cursor: pointer;
+      transition: transform 0.3s ease; /* 添加图片旋转的过渡效果 */
+    }
+
+    #pic img.landscape {
+      transform: rotate(90deg); /* 图片旋转90度 */
+    }
+
+    /* 在全屏模式下横屏显示图片 */
+    @media screen and (orientation: landscape) {
+      #pic img.fullscreen {
+        transform: rotate(0deg); /* 图片旋转回正常显示 */
+      }
     }
 
     .app {
@@ -91,11 +102,12 @@
     );
     const id = query.get("id");
     const $pic = document.getElementById("pic");
-    $pic.innerHTML =
-      [".jpg", ".png", ".jpeg"]
-        .map((ext) => suffix + "/" + id + ext)
-        .map((src) => `<source srcset="${src}" />`)
-        .join("") + "<img id='image'>";
+    const $image = document.createElement("img");
+    $image.src = `${suffix}/${id}.jpg`;
+    $image.addEventListener("click", () => {
+      $image.classList.toggle("landscape"); // 切换图片的横屏显示状态
+    });
+    $pic.appendChild($image);
 
     const tags = {
       phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
@@ -111,17 +123,6 @@
 
     const formatData = (data) => {
       return data.map((row) => row.map((cell) => cell.replace(/&/g, "<br/>")));
-    };
-
-    const toggleFullScreen = () => {
-      const elem = document.documentElement;
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
-      }
     };
 
     const main = async () => {
@@ -172,9 +173,6 @@
           .join('') +
         '</tbody>';
       $tail.innerHTML = tail;
-
-      const $image = document.getElementById('image');
-      $image.addEventListener('click', toggleFullScreen);
     };
 
     main().catch((err) => {
@@ -183,5 +181,4 @@
     });
   </script>
 </body>
-
 </html>
