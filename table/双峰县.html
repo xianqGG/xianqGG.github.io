@@ -37,6 +37,10 @@
     @media screen and (orientation: landscape) {
       #pic img.fullscreen {
         transform: rotate(0deg); /* 图片旋转回正常显示 */
+        width: 100vh; /* 设置图片宽度为视口高度 */
+        height: 100vw; /* 设置图片高度为视口宽度 */
+        max-width: none; /* 取消最大宽度限制 */
+        max-height: none; /* 取消最大高度限制 */
       }
     }
 
@@ -106,6 +110,7 @@
     $image.src = `${suffix}/${id}.jpg`;
     $image.addEventListener("click", () => {
       $image.classList.toggle("landscape"); // 切换图片的横屏显示状态
+      $image.classList.toggle("fullscreen"); // 切换图片的全屏显示状态
     });
     $pic.appendChild($image);
 
