@@ -30,6 +30,11 @@
     }
 
     #pic.fullscreen img {
+      width: auto;
+      height: 100vh;
+      max-width: 100vw;
+      max-height: 100vh;
+      object-fit: contain;
       transform: rotate(90deg);
     }
 
@@ -74,7 +79,7 @@
       width: 68px;
     }
 
-    a[href^='tel'] {
+    a[href^="tel"] {
       color: #6cf;
     }
   </style>
