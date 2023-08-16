@@ -35,16 +35,6 @@
       padding: 12px;
     }
 
-    #title,
-    #tail {
-      background-color: #f2f2f2;
-      height: 40px;
-      line-height: 40px;
-      font-size: 26px;
-      text-align: center;
-      font-weight: bolder;
-    }
-
     #table {
       width: 100%;
       border-collapse: collapse;
@@ -88,7 +78,6 @@
 <body>
   <picture id="pic"></picture>
   <div class="app">
-    <h1 id="title"></h1>
     <table id="table"></table>
     <h1 id="tail"></h1>
   </div>
@@ -125,14 +114,7 @@
 
     const main = async () => {
       const $ = document.querySelector.bind(document);
-      /**
-       * @type {HTMLElement}
-       */
-      const $title = $('#title');
       const $tail = $('#tail');
-      /**
-       * @type {HTMLElement}
-       */
       const $table = $('#table');
 
       const query = new URLSearchParams(location.search.split('?')[1]);
@@ -166,7 +148,6 @@
       const maxCount = Math.max(...data.map((it) => it.length));
 
       document.title = title;
-      $title.innerHTML = title;
       $table.innerHTML =
         '<tbody>' +
         data
