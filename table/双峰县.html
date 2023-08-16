@@ -1,185 +1,278 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>双峰县田长制</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>双峰县田长制</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+}
 
-    body {
-      background-color: #F5F5DC;
-    }
+body {
+  background-color: #f5f5dc;
+}
 
-    #pic {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      margin-top: 25px;
-    }
+#pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}
 
-    #pic img {
-      object-fit: contain;
-      width: 100%;
-      height: auto;
-    }
+#pic img {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* 添加图片旋转的过渡效果 */
+}
 
-    .app {
-      width: 700px;
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 12px;
-    }
+#pic img.landscape {
+  transform: rotate(90deg); /* 图片旋转90度 */
+}
 
-    #table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+/* 在全屏模式下横屏显示图片 */
+@media screen and (orientation: landscape) {
+  #pic img.fullscreen {
+    transform: rotate(0deg); /* 图片旋转回正常显示 */
+    width: 100vh; /* 设置图片宽度为视口高度 */
+    height: 100vw; /* 设置图片高度为视口宽度 */
+    max-width: none; /* 取消最大宽度限制 */
+    max-height: none; /* 取消最大高度限制 */
+  }
+}
 
-    tr {
-      height: 30px;
-    }
+.app {
+  width: 700px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 12px;
+}
 
-    tr:nth-child(even) {
-      background-color: transparent;
-    }
+.app.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+}
 
-    tr:not(:last-child) {
-      border-bottom: 1px solid rgba(221, 221, 221, 0.5);
-    }
+#table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-    th {
-      font-size: 16px;
-      font-weight: normal;
-      color: #333;
-      padding: 0 4px;
-      text-align: left;
-    }
+tr {
+  height: 30px;
+}
 
-    th + th {
-      border-left: 1px solid rgba(221, 221, 221, 0.5);
-    }
+tr:nth-child(even) {
+  background-color: transparent;
+}
 
-    tr th:first-of-type {
-      font-weight: bolder;
-      width: 68px;
-    }
+tr:not(:last-child) {
+  border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+}
 
-    a[href^='tel'] {
-      color: #6cf;
-    }
-  </style>
+th {
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+  padding: 0 4px;
+  text-align: left;
+}
+
+th + th {
+  border-left: 1px solid rgba(221, 221, 221, 0.5);
+}
+
+tr th:first-of-type {
+  font-weight: bolder;
+  width: 68px;
+}
+
+a[href^='tel'] {
+  color: #6cf;
+}
+</style>
 </head>
 
 <body>
-  <picture id="pic"></picture>
-  <div class="app">
-    <table id="table"></table>
-    <h1 id="tail"></h1>
-  </div>
+<picture id="pic"></picture>
+<div class="app">
+<table id="table"></table>
+<h1 id="tail"></h1>
+</div>
 
-  <script>
-    const query = new URLSearchParams(location.search);
-    const suffix = (location.pathname.split("/").at(-1) || "").replace(
-      /\.html$/i,
-      ""
-    );
-    const id = query.get("id");
-    const $pic = document.getElementById("pic");
-    $pic.innerHTML =
-      [".jpg", ".png", ".jpeg"]
-        .map((ext) => suffix + "/" + id + ext)
-        .map((src) => `<source srcset="${src}" />`)
-        .join("") + "<img>";
-
-    const tags = {
-      phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
-    };
+<script>
+const query = new URLSearchParams(location.search);
+const suffix = (location.pathname.split("/").at(-1) || "").replace(
+/.html$/i,
+""
+);
+const id = query.get("id");
+const $pic = document.getElementById("pic");
+const $image = document.createElement("img");
+�
+�
+�
+�
+�
+.
+�
+�
+�
+=
+‘
+image.src=‘{suffix}/${id}.jpg`;
 $image.addEventListener("click", () => {
-  $image.classList.toggle("landscape"); // 切换图片的横屏显示状态
-  $image.classList.toggle("fullscreen"); // 切换图片的全屏显示状态
-  if (
-    !$image.classList.contains("fullscreen") &&
-    !$app.classList.contains("fullscreen")
-  ) {
-    $app.classList.remove("fullscreen");
-    document.documentElement.exitFullscreen();
-  } else {
-    $app.classList.add("fullscreen");
-    document.documentElement.requestFullscreen();
-  }
+$image.classList.toggle("landscape"); // 切换图片的横屏显示状态
+�
+�
+�
+�
+�
+.
+�
+�
+�
+�
+�
+�
+�
+�
+�
+.
+�
+�
+�
+�
+�
+�
+(
+"
+�
+�
+�
+�
+�
+�
+�
+�
+�
+�
+"
+)
+;
+/
+/
+切换图片的全屏显示状态
+�
+�
+(
+!
+image.classList.toggle("fullscreen");//切换图片的全屏显示状态if(!image.classList.contains("fullscreen") &&
+!$app.classList.contains("fullscreen")
+) {
+$app.classList.remove("fullscreen");
+document.documentElement.exitFullscreen();
+} else {
+$app.classList.add("fullscreen");
+document.documentElement.requestFullscreen();
+}
 });
-    const renderItem = (th = '') => {
-      th = th || '';
-      th = th
-        .replace(/\d{4}-\d+/g, tags.phone)
-        .replace(/\d{11}/g, tags.phone);
-      return `<th>${th}</th>`;
-    };
+�
+�
+�
+.
+�
+�
+�
+�
+�
+�
+�
+ℎ
+�
+�
+�
+(
+pic.appendChild(image);
 
-    const formatData = (data) => {
-      return data.map((row) => row.map((cell) => cell.replace(/&/g, "<br/>")));
-    };
+const tags = {
+  phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
+};
 
-    const main = async () => {
-      const $ = document.querySelector.bind(document);
-      const $tail = $('#tail');
-      const $table = $('#table');
+const renderItem = (th = '') => {
+  th = th || '';
+  th = th
+    .replace(/\d{4}-\d+/g, tags.phone)
+    .replace(/\d{11}/g, tags.phone);
+  return `<th>${th}</th>`;
+};
 
-      const query = new URLSearchParams(location.search.split('?')[1]);
-      const path = `双峰县/${query.get('id')}.txt?${Date.now()}`;
+const formatData = (data) => {
+  return data.map((row) => row.map((cell) => cell.replace(/&/g, "<br/>")));
+};
 
-      let [[title], ...data] = await fetch(path)
-        .then((res) => res.text())
-        .catch(() => '')
-        .then((str) =>
-          str
-            .split(/^$/gm)
-            .map((it) => it.trim())
-            .filter(Boolean)
-            .map((it) =>
-              it
-                .split(/\n|\r/)
-                .map((subit) => subit.trim())
-                .filter(Boolean),
-            ),
-        );
+const main = async () => {
+  const $ = document.querySelector.bind(document);
+  const $app = $(".app");
+  const $tail = $("#tail");
+  const $table = $("#table");
 
-      data = formatData(data);
+  const query = new URLSearchParams(location.search.split('?')[1]);
+  const path = `双峰县/${query.get('id')}.txt?${Date.now()}`;
 
-      let tail = '';
-      const lastdata = data[data.length - 1];
-      if (lastdata && lastdata.length === 1) {
-        tail = lastdata[0];
-        data = data.slice(0, data.length - 1);
-      }
+  let [[title], ...data] = await fetch(path)
+    .then((res) => res.text())
+    .catch(() => "")
+    .then((str) =>
+      str
+        .split(/^$/gm)
+        .map((it) => it.trim())
+        .filter(Boolean)
+        .map((it) =>
+          it
+            .split(/\n|\r/)
+            .map((subit) => subit.trim())
+            .filter(Boolean),
+        ),
+    );
 
-      const maxCount = Math.max(...data.map((it) => it.length));
+  data = formatData(data);
 
-      document.title = title;
-      $table.innerHTML =
-        '<tbody>' +
-        data
-          .map((rows) =>
-            Array.from({ length: maxCount })
-              .map((_, i) => renderItem(rows[i]))
-              .join(''),
-          )
-          .map((rowStr) => `<tr>${rowStr}</tr>`)
-          .join('') +
-        '</tbody>';
-      $tail.innerHTML = tail;
-    };
+  let tail = "";
+  const lastdata = data[data.length - 1];
+  if (lastdata && lastdata.length === 1) {
+    tail = lastdata[0];
+    data = data.slice(0, data.length - 1);
+  }
 
-    main().catch((err) => {
-      console.error(err);
-      alert('错误：' + err.message);
-    });
-  </script>
+  const maxCount = Math.max(...data.map((it) => it.length));
+
+  document.title = title;
+  $table.innerHTML =
+    "<tbody>" +
+    data
+      .map((rows) =>
+        Array.from({ length: maxCount })
+          .map((_, i) => renderItem(rows[i]))
+          .join(""),
+      )
+      .map((rowStr) => `<tr>${rowStr}</tr>`)
+      .join("") +
+    "</tbody>";
+  $tail.innerHTML = tail;
+};
+
+main().catch((err) => {
+  console.error(err);
+  alert("错误：" + err.message);
+});
+</script>
 </body>
-
 </html>
