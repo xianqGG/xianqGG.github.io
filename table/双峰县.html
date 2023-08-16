@@ -94,7 +94,7 @@
       [".jpg", ".png", ".jpeg"]
         .map((ext) => suffix + "/" + id + ext)
         .map((src) => `<source srcset="${src}" />`)
-        .join("") + "<img>";
+        .join("") + "<img id='image'>";
 
     const tags = {
       phone: (phone = '') => `<a href="tel:${phone}">${phone}</a>`,
@@ -110,6 +110,16 @@
 
     const formatData = (data) => {
       return data.map((row) => row.map((cell) => cell.replace(/&/g, "<br/>")));
+    };
+    
+    const toggleFullScreen = (element) => {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
     };
 
     const main = async () => {
@@ -160,6 +170,11 @@
           .join('') +
         '</tbody>';
       $tail.innerHTML = tail;
+
+      const $image = document.getElementById('image');
+      $image.addEventListener('click', function() {
+        toggleFullScreen($image);
+      });
     };
 
     main().catch((err) => {
