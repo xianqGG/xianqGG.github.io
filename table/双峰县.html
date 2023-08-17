@@ -79,7 +79,6 @@
   <picture id="pic"></picture>
   <div class="app">
     <table id="table"></table>
-
   </div>
 
   <script>
@@ -114,7 +113,6 @@
 
     const main = async () => {
       const $ = document.querySelector.bind(document);
-      const $tail = $('#tail');
       const $table = $('#table');
 
       const query = new URLSearchParams(location.search.split('?')[1]);
@@ -138,13 +136,6 @@
 
       data = formatData(data);
 
-      let tail = '';
-      const lastdata = data[data.length - 1];
-      if (lastdata && lastdata.length === 1) {
-        tail = lastdata[0];
-        data = data.slice(0, data.length - 1);
-      }
-
       const maxCount = Math.max(...data.map((it) => it.length));
 
       document.title = title;
@@ -159,7 +150,6 @@
           .map((rowStr) => `<tr>${rowStr}</tr>`)
           .join('') +
         '</tbody>';
-      $tail.innerHTML = tail;
     };
 
     main().catch((err) => {
