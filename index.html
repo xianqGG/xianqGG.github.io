@@ -1,16 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<link rel="icon" type="image/svg+xml" href="src/favicon.svg" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>qrcode</title>
+  <meta charset="UTF-8">
+  <title>北京时间</title>
+  <style>
+    /* CSS样式 */
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #ff4081;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .time {
+      font-size: 72px;
+      font-weight: bold;
+      color: #ff4081;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .decorative-line {
+      width: 200px;
+      height: 2px;
+      background-color: #ff4081;
+      margin: 20px auto;
+    }
+    .date {
+      font-size: 24px;
+      font-style: italic;
+      color: #ff4081;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  </style>
 </head>
 <body>
-<div id="root"></div>
-<script type="module" src="/src/main.tsx"></script>
-<script>
-window.location.href = "https://xianqgg.github.io/picture/动感超人biubiu.JPG";
-</script>
+  <div class="container">
+    <h1>北京时间</h1>
+    <div class="time" id="time-container">
+      <span id="hour"></span>
+      <span>:</span>
+      <span id="minute"></span>
+      <span>:</span>
+      <span id="second"></span>
+    </div>
+    <div class="decorative-line"></div>
+    <p class="date" id="current-date"></p>
+  </div>
+
+  <script>
+    // JavaScript部分，用于显示当前时间
+    function showCurrentTime() {
+      const hourElement = document.getElementById('hour');
+      const minuteElement = document.getElementById('minute');
+      const secondElement = document.getElementById('second');
+      const currentDateElement = document.getElementById('current-date');
+
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const weekday = ['日', '一', '二', '三', '四', '五', '六'][now.getDay()];
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      hourElement.textContent = hours;
+      minuteElement.textContent = minutes;
+      secondElement.textContent = seconds;
+
+      currentDateElement.textContent = `${year}年${month}月${day}日 星期${weekday}`;
+    }
+
+    showCurrentTime(); // 页面加载后立即显示当前时间
+    setInterval(showCurrentTime, 1000); // 每秒更新一次当前时间
+  </script>
 </body>
 </html>
