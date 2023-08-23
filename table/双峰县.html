@@ -73,20 +73,28 @@
       color: #6cf;
     }
 
+#clock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 31px;
+  position: relative;
+}
+
 #clock::before {
   content: "";
-  display: block;
+  position: absolute;
+  top: -5px;
   width: 100%;
   height: 1px;
-  background-color: black;
-  margin-bottom: 10px;
+  background-color: #333;
 }
 
 #clock {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 31px;
+  margin-top: 32px;
 }
 
   </style>
