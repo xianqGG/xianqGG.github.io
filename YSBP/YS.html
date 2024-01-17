@@ -11,7 +11,7 @@
 }
 
 body {
-  padding: 12px;
+  padding: 5px;
 }
 
 .app {
@@ -22,8 +22,8 @@ body {
 
 #title,
 #table {
-  background-color: #f2f2f2;
-  padding: 12px;
+
+  padding: 10px;
 }
 
 #title {
@@ -31,7 +31,7 @@ body {
 }
 
 #table {
-  margin-top: 12px;
+  margin-top: 0px;
 }
 
 tr:nth-child(even) {
@@ -39,10 +39,10 @@ tr:nth-child(even) {
 }
 
 th {
-  font-size: 16px;
-  font-weight: normal;
-  color: #333;
-  padding: 4px;
+  font-size: 20px;
+  font-weight: norma1;
+  color: #555;
+  padding: 1px;
   text-align: left;
 }
 
@@ -82,7 +82,7 @@ a[href^='tel'] {
     const $table = $('#table');
 
     const query = new URLSearchParams(location.search.split('?')[1]);
-    const path = `1/${query.get('id')}.txt?${Date.now()}`;
+    const path = `data/${query.get('id')}.txt?${Date.now()}`;
 
     let [[title], ...data] = await fetch(path)
       .then((res) => res.text())
